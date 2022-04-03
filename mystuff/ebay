@@ -1,0 +1,164 @@
+import json
+from logging import StringTemplateStyle
+import numbers
+from os import link, name
+import pandas as pd
+# from pandas.io.json import json_normalize
+
+# with open(r'cards\en\bw1.json', encoding = 'UTF-8') as file:
+#     temp = json.load(file)
+# bw1= pd.json_normalize(temp)
+
+
+# with open(r'sets\en.json', encoding = 'UTF-8') as file:
+#     temp = json.load(file)
+# sets= pd.json_normalize(temp)
+
+
+# bw1.to_csv(r'C:\Users\Brian\Documents\TCGData\bw1.csv', encoding = 'UTF-8')
+
+# print('\n',  sets.loc[sets['printedTotal'] == 127]['name']  ,'\n')
+
+# h = sets.loc[sets['printedTotal'] == 127]
+
+# h = str(h)
+
+# print(h)
+
+
+
+    # def getSet(self, printedNum, releaseYear=0):
+    #     setList = []
+    #     setWithYear = []
+    #     for each in self.sets:
+    #         if each['printedTotal'] == printedNum:
+    #             if releaseYear != '' and int(each['releaseDate'][0:4]) == releaseYear:
+    #                 setWithYear.append(each['name'])
+    #             else:
+    #                 setList.append(each['name'])
+        
+                
+    #     return f"\nwithout: {setList}\nWith: {setWithYear}\n"
+
+    # f"{card['name']} - {eachSet['series']}: {eachSet['name']} ({eachSet['releaseDate']})"
+
+
+
+
+
+
+
+class Pokebay:
+    def __init__(self):
+        with open(r'sets\en.json', encoding = 'UTF-8') as file:
+            self.sets = json.load(file)
+       
+
+
+
+    def fileOpener(self, setID):
+        with open(f'cards\\en\\{setID}.json', encoding = 'UTF-8') as file:
+            return json.load(file)
+
+
+    def getSet(self, cardNum, printedNum): 
+        nameList = []
+        linkList = []
+        idList = []
+        itr = 0
+        for eachSet in self.sets:
+            if eachSet['printedTotal'] == printedNum:
+                cardSet = self.fileOpener(eachSet['id'])
+                for card in cardSet:
+                    if card['number'] == str(cardNum):
+                        nameList.append(card['name'])
+                        linkList.append(f"{itr}: {card['images']['small']}") #some images are called 'logo' instead of 'small'
+                        idList.append(card['id'])
+                        itr+=1
+
+        if len(nameList) > 1:
+            selected = input(f"\nNames: {nameList}\nLinks: {linkList}\nEnter card's index\n")
+            finalID = idList[int(selected)]
+        else:
+            finalID = idList[0]
+
+        finalFile = self.fileOpener(finalID.split('-')[0])
+
+        for each in finalFile:
+            if each['id'] == finalID:
+                finalCard = each
+        
+        for each in self.sets:
+            if each['id'] == finalID.split('-')[0]:
+                finalSet = each
+
+
+        con = input('Condition? nm, lp, mp hp, or d  ').lower()
+        if con == 'nm':
+            condition = 'Near Mint'
+        elif con == 'lp':
+            condition = 'Lightly Played'
+        elif con == 'mp':
+            condition = 'Moderately Played'
+        elif con == 'hp':
+            condition = 'Heavily Played'
+        elif con == 'd':
+            condition = 'Damaged'
+
+        extra = int(input("\n0: none, 1: Reverse Holo, 2: Holo"))
+        foil = ''
+        if extra == 1:
+            foil = 'Reverse Holo'
+        elif extra == 2:
+            foil = 'Holo' 
+
+        
+        print('\n')
+
+        if foil != '':
+            title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {condition} Pokemon Card" 
+
+            if len(title) > 80:
+                title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {con.upper()} - Pokemon Card"
+                if len(title) > 80:
+                    title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con.upper()} - Pokemon Card\nStill too long"
+
+
+
+
+        elif len(title) > 80:
+            title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con.upper()} - Pokemon Card"
+            if len(title) > 80:
+                title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con.upper()} - Pokemon Card\nStill too long"
+        
+        description = f"\nShipping: This card will be safely shipped in an envelope with plenty of bend/damage protection. I can also ship it in a bubble mailer if you are willing to pay the additional shipping.\n\nCondition: This card is in {condition} condition. The card pictured is the card you will be receiving."
+
+        print(title)
+        print(description)
+
+        
+        
+#  Name - Series: set (1/100) - edition - condition - 'Pokemon Card'
+
+    # def cardSelector(self, names, links):
+    #     selected = input(f"\nEnter card's index\nNames: {names}\nLinks: {links}\n")
+    #     return names[int(selected)]
+
+    # def stringMaker(self):
+    
+
+
+
+
+
+    # to do:
+    #     add holo to strings
+    #     record what is listed for quantity, record keeping, and profit/loss
+    # have it automatically bring up ebay link
+    # turn condition into numbers
+
+
+
+p = Pokebay()
+# print("\nhere: ", p.getSet(int(input("\nCard number? ")), int(input("Full set: "))))
+p.getSet(int(input("\nCard number? ")), int(input("Full set: ")))
