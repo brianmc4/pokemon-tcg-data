@@ -30,10 +30,28 @@ class Pokebay:
     def getSet(self, cardNum, printedNum):
         '''Takes input of card information, finds the right card, and creates a string to copy/paste into ebay
         Args:
-            cardNum(int): the ''' 
-        nameList = [] #List of selected card names for printing in console
-        linkList = [] #List of links of pictures of cards for identifying
-        idList = [] #List of the card IDs
+            cardNum(int): The number of the card in the set
+            printedNum(int): The total number of cards in the set as printed on the card
+        Attributes:
+            nameList(list): List of selected card names for printing in console
+            linkList(list): List of URLs to pictures of the cards for identifying
+            idList(list): List of the card IDs
+            itr(int): iterator
+            cardSet(json): The entire set of cards
+            finalID(string): The ID of the selected card
+            finalFile(json): The file of the selected card
+            finalCard(json): The info of the selected card
+            finalSet(json): Set info for the final card
+            con(string): The input of the card's condition
+            condition(string): The final string of the condition for copy/paste
+            extra(int): The input of whether the card is holographic
+            foil(string): The final string of the holo for copy/paste
+            title(string): The compiled title string with all info to copy and paste
+            description(string): A string to copy/paste into the description
+        ''' 
+        nameList = [] 
+        linkList = [] 
+        idList = [] 
         itr = 0
 
         #This finds the correct cards and populates the lists above
