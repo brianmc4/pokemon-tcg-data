@@ -3,45 +3,6 @@ from logging import StringTemplateStyle
 import numbers
 from os import link, name
 import pandas as pd
-# from pandas.io.json import json_normalize
-
-# with open(r'cards\en\bw1.json', encoding = 'UTF-8') as file:
-#     temp = json.load(file)
-# bw1= pd.json_normalize(temp)
-
-
-# with open(r'sets\en.json', encoding = 'UTF-8') as file:
-#     temp = json.load(file)
-# sets= pd.json_normalize(temp)
-
-
-# bw1.to_csv(r'C:\Users\Brian\Documents\TCGData\bw1.csv', encoding = 'UTF-8')
-
-# print('\n',  sets.loc[sets['printedTotal'] == 127]['name']  ,'\n')
-
-# h = sets.loc[sets['printedTotal'] == 127]
-
-# h = str(h)
-
-# print(h)
-
-
-
-    # def getSet(self, printedNum, releaseYear=0):
-    #     setList = []
-    #     setWithYear = []
-    #     for each in self.sets:
-    #         if each['printedTotal'] == printedNum:
-    #             if releaseYear != '' and int(each['releaseDate'][0:4]) == releaseYear:
-    #                 setWithYear.append(each['name'])
-    #             else:
-    #                 setList.append(each['name'])
-        
-                
-    #     return f"\nwithout: {setList}\nWith: {setWithYear}\n"
-
-    # f"{card['name']} - {eachSet['series']}: {eachSet['name']} ({eachSet['releaseDate']})"
-
 
 
 
@@ -57,33 +18,45 @@ class Pokebay:
 
 
     def fileOpener(self, setID):
+        '''Opens up the card set's json file
+
+        Args:
+            setID(string): the set code that is also used as file name ex.) bw03
+        '''
         with open(f'cards\\en\\{setID}.json', encoding = 'UTF-8') as file:
             return json.load(file)
 
 
-    def getSet(self, cardNum, printedNum): 
-        nameList = []
-        linkList = []
-        idList = []
+    def getSet(self, cardNum, printedNum):
+        '''Takes input of card information, finds the right card, and creates a string to copy/paste into ebay
+        Args:
+            cardNum(int): the ''' 
+        nameList = [] #List of selected card names for printing in console
+        linkList = [] #List of links of pictures of cards for identifying
+        idList = [] #List of the card IDs
         itr = 0
-        for eachSet in self.sets:
-            if eachSet['printedTotal'] == printedNum:
+
+        #This finds the correct cards and populates the lists above
+        for eachSet in self.sets: 
+            if eachSet['printedTotal'] == printedNum: #Uses the set total to find the right set, then calls file opener with the set id
                 cardSet = self.fileOpener(eachSet['id'])
-                for card in cardSet:
+                for card in cardSet: #finds the card in it's set and appends the information to lists
                     if card['number'] == str(cardNum):
                         nameList.append(card['name'])
                         linkList.append(f"{itr}: {card['images']['small']}") #some images are called 'logo' instead of 'small'
                         idList.append(card['id'])
                         itr+=1
 
+        #This prints the lists if more than one card matches the given info
         if len(nameList) > 1:
             selected = input(f"\nNames: {nameList}\nLinks: {linkList}\nEnter card's index\n")
             finalID = idList[int(selected)]
         else:
             finalID = idList[0]
 
-        finalFile = self.fileOpener(finalID.split('-')[0])
+        finalFile = self.fileOpener(finalID.split('-')[0]) 
 
+        #Sets a var for the selected card and its set.
         for each in finalFile:
             if each['id'] == finalID:
                 finalCard = each
@@ -93,6 +66,7 @@ class Pokebay:
                 finalSet = each
 
 
+        #Asks for the card condition to print in the console
         con = input('Condition? nm, lp, mp hp, or d  ').lower()
         if con == 'nm':
             condition = 'Near Mint'
@@ -105,16 +79,16 @@ class Pokebay:
         elif con == 'd':
             condition = 'Damaged'
 
+        #Asks whether it's holographic
         extra = int(input("\n0: none, 1: Reverse Holo, 2: Holo"))
         foil = ''
         if extra == 1:
             foil = 'Reverse Holo'
         elif extra == 2:
             foil = 'Holo' 
-
-        
         print('\n')
 
+        #Here is compiles the final copy/paste strings, the string must be <= 80 chars
         if foil != '':
             title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {condition} Pokemon Card" 
 
@@ -122,10 +96,6 @@ class Pokebay:
                 title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {con.upper()} - Pokemon Card"
                 if len(title) > 80:
                     title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con.upper()} - Pokemon Card\nStill too long"
-
-
-
-
         elif len(title) > 80:
             title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con.upper()} - Pokemon Card"
             if len(title) > 80:
@@ -137,17 +107,6 @@ class Pokebay:
         print(description)
 
         
-        
-#  Name - Series: set (1/100) - edition - condition - 'Pokemon Card'
-
-    # def cardSelector(self, names, links):
-    #     selected = input(f"\nEnter card's index\nNames: {names}\nLinks: {links}\n")
-    #     return names[int(selected)]
-
-    # def stringMaker(self):
-    
-
-
 
 
 
