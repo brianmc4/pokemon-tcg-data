@@ -15,6 +15,7 @@ items = soup.find_all('item')
 for item in items:
     cat = item.categoryname.string.lower()
     title = item.title.string.lower()
+
     price = int(round(float(item.currentprice.string)))
     url = item.viewitemurl.string.lower()
 
@@ -24,3 +25,4 @@ for item in items:
     print('price:\n' + str(price) + '\n')
     print('url:\n' + url + '\n')
     input()
+    #Copied from https://www.youtube.com/watch?v=O5KdYrD6_H4&t=29s
