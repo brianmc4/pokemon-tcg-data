@@ -27,6 +27,12 @@ class Pokebay:
             return json.load(file)
 
 
+    def excel_adder():
+        '''Takes the final card information and adds a row into excel
+        '''
+        
+
+
     def getSet(self, cardNum, printedNum):
         '''Takes input of card information, finds the right card, and creates a string to copy/paste into ebay
         Args:
@@ -129,7 +135,10 @@ class Pokebay:
         print(title)
         print(description)
 
-        
+        confirmer = int(input('Confirm? 0=Y, 1=N'))
+
+        if confirmer = 0:
+            excel_adder()
 
 
 
@@ -137,6 +146,7 @@ class Pokebay:
     #     add holo to strings
     #     record what is listed for quantity, record keeping, and profit/loss
     # have it automatically bring up ebay link
+    # Put copy/paste into an excel cell instead
 
 
 
