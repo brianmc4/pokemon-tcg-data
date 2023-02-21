@@ -85,17 +85,22 @@ class Pokebay:
 
 
         #Asks for the card condition to print in the console
-        con = input('Condition? nm, lp, mp hp, or d  ').lower()
-        if con == 'nm':
+        con = int(input('Condition? 0=nm, 1=lp, 2=mp, 3=hp, or 4=d  '))
+        if con == 0:
             condition = 'Near Mint'
-        elif con == 'lp':
+            con_short = "NM"
+        elif con == 1:
             condition = 'Lightly Played'
-        elif con == 'mp':
+            con_short = "LP"
+        elif con == 2:
             condition = 'Moderately Played'
-        elif con == 'hp':
+            con_short = "MP"
+        elif con == 3:
             condition = 'Heavily Played'
-        elif con == 'd':
+            con_short = "HP"
+        elif con == 4:
             condition = 'Damaged'
+            con_short = "D"
 
         #Asks whether it's holographic
         extra = int(input("\n0: none, 1: Reverse Holo, 2: Holo"))
@@ -111,13 +116,13 @@ class Pokebay:
             title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {condition} Pokemon Card" 
 
             if len(title) > 80:
-                title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {con.upper()} - Pokemon Card"
+                title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {con_short} - Pokemon Card"
                 if len(title) > 80:
-                    title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con.upper()} - Pokemon Card\nStill too long"
+                    title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card\nStill too long"
         else:
-            title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con.upper()} - Pokemon Card"
+            title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card"
             if len(title) > 80:
-                title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con.upper()} - Pokemon Card\nStill too long"
+                title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card\nStill too long"
         
         description = f"\nShipping: This card will be safely shipped in an envelope with plenty of bend/damage protection. I can also ship it in a bubble mailer if you are willing to pay the additional shipping.\n\nCondition: This card is in {condition} condition. The card pictured is the card you will be receiving."
 
@@ -132,7 +137,7 @@ class Pokebay:
     #     add holo to strings
     #     record what is listed for quantity, record keeping, and profit/loss
     # have it automatically bring up ebay link
-    # turn condition into numbers
+
 
 
 
