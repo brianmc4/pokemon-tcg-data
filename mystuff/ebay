@@ -3,6 +3,7 @@ from logging import StringTemplateStyle
 import numbers
 from os import link, name
 import pandas as pd
+from csv import writer
 
 
 
@@ -26,11 +27,8 @@ class Pokebay:
         with open(f'cards\\en\\{setID}.json', encoding = 'UTF-8') as file:
             return json.load(file)
 
-
-    def excel_adder():
-        '''Takes the final card information and adds a row into excel
-        '''
         
+
 
 
     def getSet(self, cardNum, printedNum):
@@ -135,10 +133,16 @@ class Pokebay:
         print(title)
         print(description)
 
-        confirmer = int(input('Confirm? 0=Y, 1=N'))
 
-        if confirmer = 0:
-            excel_adder()
+        #Takes the name of the card and the title and puts into the excel sheet
+        confirmer = int(input('Confirm? 0=Y, 1=N'))
+        if confirmer == 0:
+            new_row = [0, finalCard['name'], title]
+            with open(r'mystuff\MyCards.csv', 'a') as f:
+                writer_obj = writer(f)
+                writer_obj.writerow(new_row)
+                f.close()
+            
 
 
 
