@@ -114,7 +114,7 @@ class Pokebay:
                 title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {con.upper()} - Pokemon Card"
                 if len(title) > 80:
                     title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con.upper()} - Pokemon Card\nStill too long"
-        elif len(title) > 80:
+        else:
             title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con.upper()} - Pokemon Card"
             if len(title) > 80:
                 title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con.upper()} - Pokemon Card\nStill too long"
