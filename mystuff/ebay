@@ -131,17 +131,21 @@ class Pokebay:
         description = f"\nShipping: This card will be safely shipped in an envelope with plenty of bend/damage protection. I can also ship it in a bubble mailer if you are willing to pay the additional shipping.\n\nCondition: This card is in {condition} condition. The card pictured is the card you will be receiving."
 
         print(title)
-        print(description)
+       # print(description)
 
 
         #Takes the name of the card and the title and puts into the excel sheet
         confirmer = int(input('Confirm? 0=Y, 1=N'))
         if confirmer == 0:
-            new_row = [0, finalCard['name'], title]
-            with open(r'mystuff\MyCards.csv', 'a') as f:
+            new_row = [0, finalCard['name'], finalSet['series'], finalSet['name'], finalCard['number'], finalSet['printedTotal'], foil, condition, title]
+            with open(r'mystuff\CardInventory.csv', 'a') as f:
                 writer_obj = writer(f)
                 writer_obj.writerow(new_row)
                 f.close()
+
+        repeat = int(input("Again? 0=Yes, 1=No"))
+        if repeat == 0:
+            p.getSet(int(input("\nCard number? ")), int(input("Full set: ")))
             
 
 
@@ -150,7 +154,7 @@ class Pokebay:
     #     add holo to strings
     #     record what is listed for quantity, record keeping, and profit/loss
     # have it automatically bring up ebay link
-    # Put copy/paste into an excel cell instead
+    # 
 
 
 
