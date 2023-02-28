@@ -1,11 +1,2 @@
 ﻿PK,CARD_NAME,SERIES,SET_NAME,NUM_IN_SET,SET_TOTAL,FOIL,CONDITION,EBAY_TITLE
-0,Shellder,XY,BREAKpoint,23,122,,Moderately Played,Shellder - XY: BREAKpoint (23/122) - MP - Pokemon Card
-0,Cosmog,Sun & Moon,Team Up,69,181,,Moderately Played,Cosmog - Sun & Moon: Team Up (69/181) - MP - Pokemon Card
-0,Dana,Sun & Moon,Team Up,137,181,,Moderately Played,Dana - Sun & Moon: Team Up (137/181) - MP - Pokemon Card
-0,Shellder,XY,BREAKpoint,22,122,,Moderately Played,Shellder - XY: BREAKpoint (22/122) - MP - Pokemon Card
-0,Weedle,Sun & Moon,Team Up,2,181,,Lightly Played,Weedle - Sun & Moon: Team Up (2/181) - LP - Pokemon Card
-0,Froakie,XY,BREAKpoint,38,122,Reverse Holo,Lightly Played,Froakie - XY: BREAKpoint (38/122) - Reverse Holo Lightly Played Pokemon Card
-0,Growlithe,XY,BREAKpoint,10,122,,Lightly Played,Growlithe - XY: BREAKpoint (10/122) - LP - Pokemon Card
-0,Psyduck,XY,BREAKpoint,16,122,,Moderately Played,Psyduck - XY: BREAKpoint (16/122) - MP - Pokemon Card
-0,Energy Restore,Diamond & Pearl,Diamond & Pearl,106,130,,Heavily Played,Energy Restore - Diamond & Pearl: Diamond & Pearl (106/130) - HP - Pokemon Card
-0,Energy Switch,Diamond & Pearl,Diamond & Pearl,107,130,,Heavily Played,Energy Switch - Diamond & Pearl: Diamond & Pearl (107/130) - HP - Pokemon Card
+0,t,t,t,t,t,t,t,There needs to be a value in this PK for the pk_calc to work

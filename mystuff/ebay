@@ -3,7 +3,7 @@ from logging import StringTemplateStyle
 import numbers
 from os import link, name
 import pandas as pd
-from csv import writer
+# from csv import writer
 
 
 
@@ -122,11 +122,11 @@ class Pokebay:
             if len(title) > 80:
                 title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {con_short} - Pokemon Card"
                 if len(title) > 80:
-                    title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card\nStill too long"
+                    title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card Still too long"
         else:
             title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card"
             if len(title) > 80:
-                title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card\nStill too long"
+                title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card Still too long"
         
         description = f"\nShipping: This card will be safely shipped in an envelope with plenty of bend/damage protection. I can also ship it in a bubble mailer if you are willing to pay the additional shipping.\n\nCondition: This card is in {condition} condition. The card pictured is the card you will be receiving."
 
@@ -134,18 +134,34 @@ class Pokebay:
        # print(description)
 
 
-        #Takes the name of the card and the title and puts into the excel sheet
         confirmer = int(input('Confirm? 0=Y, 1=N'))
+        
         if confirmer == 0:
-            new_row = [0, finalCard['name'], finalSet['series'], finalSet['name'], finalCard['number'], finalSet['printedTotal'], foil, condition, title]
-            with open(r'mystuff\CardInventory.csv', 'a') as f:
-                writer_obj = writer(f)
-                writer_obj.writerow(new_row)
-                f.close()
+
+            inv = pd.read_csv(r'mystuff\CardInventory.csv', encoding='utf-8')
+            pk_calc = int(inv['PK'].iloc[(len(inv.index)-1)])+1 #This manually creates the PK because index was messing up. It adds 1 to previous pk.
+            new_row = [pk_calc, finalCard['name'], finalSet['series'], finalSet['name'], finalCard['number'], finalSet['printedTotal'], foil, condition, title]
+            inv.loc[len(inv.index)] = new_row
+            inv.to_csv(r'mystuff\CardInventory.csv', encoding='utf-8',index=False) #index=False because it created a new index col every time
+
+
+
+
+
+        # #Takes the name of the card and the title and puts into the excel sheet
+        # confirmer = int(input('Confirm? 0=Y, 1=N'))
+        # if confirmer == 0:
+        #     new_row = [0, finalCard['name'], finalSet['series'], finalSet['name'], finalCard['number'], finalSet['printedTotal'], foil, condition, title]
+        #     with open(r'mystuff\CardInventory.csv', 'a') as f:
+        #         writer_obj = writer(f)8
+
+        #         writer_obj.writerow(new_row)
+                
 
         repeat = int(input("Again? 0=Yes, 1=No"))
         if repeat == 0:
             p.getSet(int(input("\nCard number? ")), int(input("Full set: ")))
+       
             
 
 
