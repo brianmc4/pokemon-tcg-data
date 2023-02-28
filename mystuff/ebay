@@ -32,7 +32,7 @@ class Pokebay:
 
 
     def getSet(self, cardNum, printedNum):
-        '''Takes input of card information, finds the right card, and creates a string to copy/paste into ebay
+        '''Takes input of card information, finds the right card, and creates a string to copy/paste into ebay (needs to be updated)
         Args:
             cardNum(int): The number of the card in the set
             printedNum(int): The total number of cards in the set as printed on the card
@@ -89,7 +89,7 @@ class Pokebay:
 
 
         #Asks for the card condition to print in the console
-        con = int(input('Condition? 0=nm, 1=lp, 2=mp, 3=hp, or 4=d  '))
+        con = int(input('Condition? 0=nm, 1=lp, 2=mp, 3=hp, or 4=d   '))
         if con == 0:
             condition = 'Near Mint'
             con_short = "NM"
@@ -107,7 +107,7 @@ class Pokebay:
             con_short = "D"
 
         #Asks whether it's holographic
-        extra = int(input("\n0: none, 1: Reverse Holo, 2: Holo"))
+        extra = int(input("\n0: none, 1: Reverse Holo, 2: Holo   "))
         foil = ''
         if extra == 1:
             foil = 'Reverse Holo'
@@ -134,15 +134,16 @@ class Pokebay:
        # print(description)
 
 
-        confirmer = int(input('Confirm? 0=Y, 1=N'))
+        confirmer = int(input('\n\nConfirm? 0=Y, 1=N   '))
         
         if confirmer == 0:
 
+            #Reads the inventory file, appends the new car, then exports it
             inv = pd.read_csv(r'mystuff\CardInventory.csv', encoding='utf-8')
             pk_calc = int(inv['PK'].iloc[(len(inv.index)-1)])+1 #This manually creates the PK because index was messing up. It adds 1 to previous pk.
             new_row = [pk_calc, finalCard['name'], finalSet['series'], finalSet['name'], finalCard['number'], finalSet['printedTotal'], foil, condition, title]
             inv.loc[len(inv.index)] = new_row
-            inv.to_csv(r'mystuff\CardInventory.csv', encoding='utf-8',index=False) #index=False because it created a new index col every time
+            inv.to_csv(r'mystuff\CardInventory.csv', encoding='utf-8',index=False) #index=False because otherwise it creates a new index col every time
 
 
 
@@ -158,9 +159,9 @@ class Pokebay:
         #         writer_obj.writerow(new_row)
                 
 
-        repeat = int(input("Again? 0=Yes, 1=No"))
+        repeat = int(input("\nAgain? 0=Yes, 1=No   "))
         if repeat == 0:
-            p.getSet(int(input("\nCard number? ")), int(input("Full set: ")))
+            p.getSet(int(input("\nCard number?   ")), int(input("Full set:   ")))
        
             
 
