@@ -128,7 +128,6 @@ class Pokebay:
             if len(title) > 80:
                 title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card Still too long"
         
-        description = f"\nShipping: This card will be safely shipped in an envelope with plenty of bend/damage protection. I can also ship it in a bubble mailer if you are willing to pay the additional shipping.\n\nCondition: This card is in {condition} condition. The card pictured is the card you will be receiving."
 
         print(title)
        # print(description)
@@ -141,7 +140,10 @@ class Pokebay:
             #Reads the inventory file, appends the new car, then exports it
             inv = pd.read_csv(r'mystuff\CardInventory.csv', encoding='utf-8')
             pk_calc = int(inv['PK'].iloc[(len(inv.index)-1)])+1 #This manually creates the PK because index was messing up. It adds 1 to previous pk.
-            new_row = [pk_calc, finalCard['name'], finalSet['series'], finalSet['name'], finalCard['number'], finalSet['printedTotal'], foil, condition, title]
+            #had to put the description here so it could include the PK
+            description = f"Shipping: This card will be safely shipped in an envelope with plenty of bend/damage protection. I can also ship it in a bubble mailer if you are willing to pay the additional shipping. Condition: This card is in {condition} condition. Check the card condition in the pictures, the card pictured is the card you will be receiving. {finalCard['name']}PK{pk_calc}"
+
+            new_row = [pk_calc, finalCard['name'], finalSet['series'], finalSet['name'], finalCard['number'], finalSet['printedTotal'], foil, condition, title, description]
             inv.loc[len(inv.index)] = new_row
             inv.to_csv(r'mystuff\CardInventory.csv', encoding='utf-8',index=False) #index=False because otherwise it creates a new index col every time
 
