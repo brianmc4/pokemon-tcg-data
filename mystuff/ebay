@@ -133,9 +133,12 @@ class Pokebay:
        # print(description)
 
 
-        confirmer = int(input('\n\nConfirm? 0=Y, 1=N   '))
+        duplicator = int(input('\n\nDuplicate how many times?   '))
+        itr = 0
+
+        # if confirmer == 0:
+        while(itr-1 < duplicator):
         
-        if confirmer == 0:
 
             #Reads the inventory file, appends the new car, then exports it
             inv = pd.read_csv(r'mystuff\CardInventory.csv', encoding='utf-8')
@@ -146,6 +149,8 @@ class Pokebay:
             new_row = [pk_calc, finalCard['name'], finalSet['series'], finalSet['name'], finalCard['number'], finalSet['printedTotal'], foil, condition, title, description]
             inv.loc[len(inv.index)] = new_row
             inv.to_csv(r'mystuff\CardInventory.csv', encoding='utf-8',index=False) #index=False because otherwise it creates a new index col every time
+            
+            itr=itr+1
 
 
 
