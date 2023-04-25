@@ -123,6 +123,12 @@ class Pokebay:
                 title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {con_short} - Pokemon Card"
                 if len(title) > 80:
                     title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card Still too long"
+        
+        elif(finalSet['series'] == finalSet['name']): #This is for series base set so it doesnt do Diamond and Pearl: Diamond and Pearl
+            title = f"{finalCard['name']} - {finalSet['series']}: Base Set ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card"
+            if len(title) > 80:
+                title = f"{finalCard['name']} - {finalSet['series']}: Base Set ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card Still too long"
+
         else:
             title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card"
             if len(title) > 80:
