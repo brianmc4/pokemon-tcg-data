@@ -133,7 +133,7 @@ class Pokebay:
        # print(description)
 
 
-        duplicator = int(input('\n\nDuplicate how many times?   '))
+        duplicator = int(input('\n\nDuplicate how many times?   ')) # 3 total of the same card would mean there are 2 duplicates, so I'd enter 2
         itr = 0
 
         # if confirmer == 0:
