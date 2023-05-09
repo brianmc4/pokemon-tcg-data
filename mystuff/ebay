@@ -115,6 +115,14 @@ class Pokebay:
             foil = 'Holo' 
         print('\n')
 
+
+        #This is so "common" doesn't go in the titles
+        rarity = f"{str(finalCard['rarity'])} "
+        if rarity.lower() == 'common':
+            rarity = ""
+
+
+
         #Here is compiles the final copy/paste strings, the string must be <= 80 chars
         if foil != '':
             title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {condition} Pokemon Card" 
@@ -122,19 +130,37 @@ class Pokebay:
             if len(title) > 80:
                 title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {con_short} - Pokemon Card"
                 if len(title) > 80:
-                    title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card Still too long"
+                    title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {foil} {con_short} - Pokemon Card Still too long"
         
         elif(finalSet['series'] == finalSet['name']): #This is for series base set so it doesnt do Diamond and Pearl: Diamond and Pearl
-            title = f"{finalCard['name']} - {finalSet['series']}: Base Set ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card"
+            title = f"{finalCard['name']} - {finalSet['series']}: Base Set ({finalCard['number']}/{finalSet['printedTotal']}) - {condition} - {rarity}Pokemon Card"
             if len(title) > 80:
-                title = f"{finalCard['name']} - {finalSet['series']}: Base Set ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card Still too long"
+                title = f"{finalCard['name']} - {finalSet['series']}: Base Set ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - {rarity}Pokemon Card"
+                if len(title) > 80:
+                    title = f"{finalCard['name']} - {finalSet['series']}: Base Set ({finalCard['number']}/{finalSet['printedTotal']}) - {condition} - Pokemon Card"
+                    if len(title) > 80:
+                        title = f"{finalCard['name']} - {finalSet['series']}: Base Set ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card"
+                        if len(title) > 80:
+                            title = f"{finalCard['name']} - {finalSet['series']}: Base Set ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card Still too long"
 
         else:
-            title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card"
+            title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {condition} - {rarity}Pokemon Card"
             if len(title) > 80:
-                title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card Still too long"
+                title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - {rarity}Pokemon Card"
+                if len(title) > 80:
+                    title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {condition} - Pokemon Card"
+                    if len(title) > 80:
+                        title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card"
+                        if len(title) > 80:
+                            title = f"{finalCard['name']} - {finalSet['series']}: {finalSet['name']} ({finalCard['number']}/{finalSet['printedTotal']}) - {con_short} - Pokemon Card Still too long"
         
 
+       
+       
+       
+       
+       
+       
         print(title)
        # print(description)
 
