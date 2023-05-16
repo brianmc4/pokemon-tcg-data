@@ -118,7 +118,7 @@ class Pokebay:
 
         #This is so "common" doesn't go in the titles
         rarity = f"{str(finalCard['rarity'])} "
-        if rarity.lower() == 'common':
+        if rarity.lower() == 'common ':
             rarity = ""
 
 
